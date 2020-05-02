@@ -8,9 +8,25 @@ export const fetchNews = (queries, display, start, sort) => async (dispatch, get
   let jsons = await Promise.all(promises);
   let itemBlocks = jsons.map(json => json.items);
   
+  /* Get allowed presslist */
+  let allowedPress = getState().press.allowed;
+  let getHost = (item) => {
+    return url.parse(item.originallink).host
+  }
+  let fromAllowedPress = (item) => {
+    return allowedPress[getHost(item)]
+  }
+
+  /* Filter by allowed pressList */
+  let pressFiltered = itemBlocks.map(
+    block => block.filter(item => {
+      return fromAllowedPress(item)
+    })
+  )
+
   /* Filter existing items by url */
   let existingLinks = getState().news.links
-  let filteredItems = itemBlocks.map(
+  let filteredItems = pressFiltered.map(
     block => block.filter(item => !existingLinks[item.originallink])
   )
 
@@ -53,8 +69,15 @@ export const fetchNews = (queries, display, start, sort) => async (dispatch, get
   
   /* Get hosts */
   let hosts = filteredItems.map(
-    items => items.map(item => url.parse(item.originallink).host)
-  )
+    items => items
+    .map(item => {
+      let host = getHost(item)
+      return {
+        url: host,
+        name: allowedPress[host],
+      }
+    })
+  ).reduce((acc, ele) => acc.concat(ele), [])
 
   /* Dispatch action: UPDATE_PRESS */
   dispatch({
@@ -79,14 +102,13 @@ export const deleteNews = (keyword, itemLink) => ({
  * @param {String} item.description
  * @param {String} item.pubDate
  */
-export const addNews = (keyword, item, itemLinks) => ({
+export const addNews = (keyword, item) => ({
   type: type.ADD_NEWS,
   payload: {
     keyword,
     item,
   }
 })
-
 
 
 export const addPress = ({name, link}) => ({
@@ -96,16 +118,16 @@ export const addPress = ({name, link}) => ({
 
 
 
-export const deletePress = (name) => ({
+export const deletePress = (link) => ({
   type: type.DELETE_PRESS,
-  payload: name,
+  payload: link,
 })
 
 
 
-export const togglePressFilter = (name) => ({
+export const togglePressFilter = (link) => ({
   type: type.TOGGLE_PRESS_FILTER,
-  payload: name,
+  payload: link,
 })
 
 
@@ -124,9 +146,9 @@ export const setTimeFilter = (time) => ({
 
 
 
-export const addSubscription = (email) => ({
+export const addSubscription = (email, name) => ({
   type: type.ADD_SUBSCRIPTION,
-  payload: email,
+  payload: {email, name},
 })
 
 
@@ -137,14 +159,23 @@ export const deleteSubscription = (email) => ({
 })
 
 
-
+/**
+ * At least one prop is required.
+ * @param {Boolean} setting.press
+ * @param {Boolean} setting.tag
+ * @param {Boolean} setting.time
+ */
 export const setFilterConf = (setting) => ({
   type: type.SET_FILTER_CONF,
-  payload: setting,  
+  payload: setting,
 })
 
 
-
+/**
+ * At least one prop is required.
+ * @param {Boolean} setting.auto
+ * @param {Number} setting.time
+ */
 export const setUpdateConf = (setting) => ({
   type: type.SET_UPDATE_CONF,
   payload: setting,

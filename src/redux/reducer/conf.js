@@ -1,4 +1,5 @@
 import time from '../../reference/time'
+import * as type from '../action/type'
 
 const initialState = {
   filter: {
@@ -14,7 +15,25 @@ const initialState = {
 
 
 function conf(state = initialState, action) {
-  return state
+  let newState = {
+    filter: {...state.filter},
+    update: {...state.update}
+  }
+  switch(action.type) {
+    case type.SET_FILTER_CONF: {
+      let newFilter = action.payload;
+      Object.assign(newState.filter, newFilter)
+      return newState;
+    }
+    case type.SET_UPDATE_CONF: {
+      let newFilter = action.payload;
+      Object.assign(newState.filter, newFilter)
+      return newState;
+    }
+    default: {
+      return state;
+    }
+  }
 }
 
 export default conf;
