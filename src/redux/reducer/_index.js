@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
-import conf from './conf';
-import filter from './filter';
+import query from './query';
 import news from './news';
 import press from './press';
+import filter from './filter';
+import conf from './conf';
 import subscription from './subscription';
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   news,
   press,
   subscription,
+  query,
 })
 
 export default rootReducer;

@@ -24,22 +24,27 @@ function press(state=initialState, action) {
       pressList.forEach(press => {
         if (state.existing[press.name]) return;
         newState.existing[press.name] = {
-          filtered: false,
-          host: press.url,
+          // filtered: false,
+          host: press.link,
         }
       })
       return newState;
     }
 
     case type.ADD_PRESS: {
-      let {name, link} = action.payload;
-      newState.allowed[link] = name;
+      let pressList = action.payload;
+      pressList.forEach((press) => {
+        newState.allowed[press.link] = press.name;
+      })
       return newState;
     }
 
     case type.DELETE_PRESS: {
-      let link = action.payload;
-      delete newState.allowed[link]
+      let pressList = action.payload;
+      pressList.forEach((press) => {
+        delete newState.allowed[press.link];
+        delete newState.existing[press.name];
+      })
       return newState;
     }
 

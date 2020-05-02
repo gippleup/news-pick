@@ -1,3 +1,7 @@
+export const ADD_QUERY = 'ADD_QUERY';
+export const DELETE_QUERY = 'DELETE_QUERY';
+export const CLEAR_ALL_QUERY = 'CLEAR_ALL_QUERY';
+
 export const FETCH_NEWS = 'FETCH_NEWS';
 export const ADD_NEWS = 'ADD_NEWS';
 export const DELETE_NEWS = 'DELETE_NEWS';
@@ -6,6 +10,7 @@ export const ADD_PRESS = 'ADD_PRESS';
 export const UPDATE_PRESS = 'UPDATE_PRESS';
 export const DELETE_PRESS = 'DELETE_PRESS';
 
+export const UPDATE_TAG_FILTER = 'UPDATE_TAG_FILTER';
 export const TOGGLE_TAG_FILTER = 'TOGGLE_TAG_FILTER';
 export const TOGGLE_PRESS_FILTER = 'TOGGLE_PRESS_FILTER';
 export const SET_TIME_FILTER = 'SET_TIME_FILTER';
@@ -15,3 +20,4 @@ export const DELETE_SUBSCRIPTION = 'DELETE_SUBSCRIPTION';
 
 export const SET_FILTER_CONF = 'SET_FILTER_CONF';
 export const SET_UPDATE_CONF = 'SET_UPDATE_CONF';
+export const TOGGLE_FILTER_CONF = 'TOGGLE_FILTER_CONF';

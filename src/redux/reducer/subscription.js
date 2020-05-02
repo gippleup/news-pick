@@ -2,23 +2,31 @@ import * as type from '../action/type'
 
 const initialState = {
   emails: {
-    "lpoeh01@gmail.com":"나"
+    "나": "lpoeh01@gmail.com"
   }
 }
 
 
 function subscription(state=initialState, action) {
-  let newState = {...state}
+  let newState = {
+    emails: {...state.emails}
+  }
 
   switch(action.type) {
     case type.ADD_SUBSCRIPTION: {
-      let {email, name} = action.payload;
-      newState.emails[email] = name;
+      let emailList = action.payload;
+      Object.keys(emailList).forEach((name) => {
+        newState.emails[name] = emailList[name];
+      })
       return newState;
     }
     case type.DELETE_SUBSCRIPTION: {
-      let email = action.payload;
-      delete newState.emails[email];
+      let nameList = action.payload;
+      nameList.forEach((name) => {
+        if (newState.emails[name]) {
+          delete newState.emails[name]
+        }
+      })
       return newState;
     }
     default: {

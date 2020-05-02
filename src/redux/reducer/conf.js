@@ -20,6 +20,14 @@ function conf(state = initialState, action) {
     update: {...state.update}
   }
   switch(action.type) {
+    case type.TOGGLE_FILTER_CONF: {
+      let targets = action.payload;
+      targets.forEach((target) => {
+        let prevState = !state.filter[target];
+        newState.filter[target] = !prevState;
+      })
+      return newState;
+    }
     case type.SET_FILTER_CONF: {
       let newFilter = action.payload;
       Object.assign(newState.filter, newFilter)
@@ -27,7 +35,7 @@ function conf(state = initialState, action) {
     }
     case type.SET_UPDATE_CONF: {
       let newFilter = action.payload;
-      Object.assign(newState.filter, newFilter)
+      Object.assign(newState.update, newFilter)
       return newState;
     }
     default: {

@@ -2,12 +2,29 @@ import func from './functions'
 import * as type from './type'
 import url from 'url'
 
+export const addQuery = (query) => ({
+  type: type.ADD_QUERY,
+  payload: query,
+})
+
+export const deleteQuery = (query) => ({
+  type: type.DELETE_QUERY,
+  payload: query,
+})
+
+export const clearAllQuery = () => ({
+  type: type.CLEAR_ALL_QUERY,
+})
+
 export const fetchNews = (queries, display, start, sort) => async (dispatch, getState) => {
+  /* Update tag filter */
+  dispatch(updateTagFilter(queries))
+
   /* Fetch news for keywords */
   let promises = queries.map(query => func.fetchNews(query, display, start, sort))
   let jsons = await Promise.all(promises);
   let itemBlocks = jsons.map(json => json.items);
-  
+
   /* Get allowed presslist */
   let allowedPress = getState().press.allowed;
   let getHost = (item) => {
@@ -40,14 +57,13 @@ export const fetchNews = (queries, display, start, sort) => async (dispatch, get
 
   /* Aggregate new links */
   let newLinks = filteredItems
-  .map(items => items.map(item => item.originallink))
-  .reduce((acc, block) => acc.concat(block))
-  .reduce((acc, ele) => {
-    acc[ele] = true;
-    return acc;
-  }, {});
+    .map(items => items.map(item => item.originallink))
+    .reduce((acc, block) => acc.concat(block), [])
+    .reduce((acc, ele) => {
+      acc[ele] = true;
+      return acc;
+    }, {});
 
-  
   /* Construct news blocks */
   let keywordBlocks = queries.reduce((acc, query, i) => {
     acc[query] = {
@@ -66,24 +82,21 @@ export const fetchNews = (queries, display, start, sort) => async (dispatch, get
       newLinks,
     }
   })
-  
+
   /* Get hosts */
   let hosts = filteredItems.map(
     items => items
     .map(item => {
       let host = getHost(item)
       return {
-        url: host,
+        link: host,
         name: allowedPress[host],
       }
     })
   ).reduce((acc, ele) => acc.concat(ele), [])
 
   /* Dispatch action: UPDATE_PRESS */
-  dispatch({
-    type: type.UPDATE_PRESS,
-    payload: hosts,
-  })
+  dispatch(updatePress(hosts))
 }
 
 
@@ -111,30 +124,47 @@ export const addNews = (keyword, item) => ({
 })
 
 
-export const addPress = ({name, link}) => ({
+/**
+ * @param {Array} pressList ex)[{name:'묻지마언론사', link:'http://localhost:3000},{},{}]
+ */
+export const addPress = (pressList) => ({
   type: type.ADD_PRESS,
-  payload: {name, link}
+  payload: pressList
 })
 
+export const updatePress = (hosts) => ({
+  type: type.UPDATE_PRESS,
+  payload: hosts,
+})
 
-
-export const deletePress = (link) => ({
+export const deletePress = (pressList) => ({
   type: type.DELETE_PRESS,
-  payload: link,
+  payload: pressList,
 })
 
 
 
-export const togglePressFilter = (link) => ({
+export const togglePressFilter = (links) => ({
   type: type.TOGGLE_PRESS_FILTER,
-  payload: link,
+  payload: links,
 })
 
 
+export const updateTagFilter = tags => (dispatch, getState) => {
+  let existingTags = getState().filter.tag;
+  let newTags = tags.filter(
+    (query) => existingTags[query] === undefined
+  )
+  return dispatch({
+    type: type.UPDATE_TAG_FILTER,
+    payload: newTags,
+  })
+}
 
-export const toggleTagFilter = (tag) => ({
+
+export const toggleTagFilter = tags => ({
   type: type.TOGGLE_TAG_FILTER,
-  payload: tag,
+  payload: tags,
 })
 
 
@@ -145,17 +175,21 @@ export const setTimeFilter = (time) => ({
 })
 
 
-
-export const addSubscription = (email, name) => ({
+/**
+ * @param {Object} emailList ex){"Me": "lpoeh01@gmail.com"}
+ */
+export const addSubscription = emailList => ({
   type: type.ADD_SUBSCRIPTION,
-  payload: {email, name},
+  payload: emailList,
 })
 
 
-
-export const deleteSubscription = (email) => ({
+/**
+ * @param {Array} nameList ex) ["Me", "Another Me"]
+ */
+export const deleteSubscription = nameList => ({
   type: type.DELETE_SUBSCRIPTION,
-  payload: email,
+  payload: nameList,
 })
 
 
@@ -181,3 +215,8 @@ export const setUpdateConf = (setting) => ({
   payload: setting,
 })
 
+
+export const toggleFilterConf = targetFilters => ({
+  type: type.TOGGLE_FILTER_CONF,
+  payload: targetFilters,
+})
