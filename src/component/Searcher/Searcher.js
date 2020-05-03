@@ -14,15 +14,12 @@ function Searcher({queries, interval, fetchNews, addQuery}) {
   const [curInput, setInput] = useState('');
   const [lastSearchTime, setLastSearchTime] = useState(0);
   const [leftTime, setLeftTime] = useState(0);
-  const [timers, setTimers] = useState([]);
+  const [timer, setTimer] = useState(null);
 
   const initTimer = () => {
+    if (timer) {timer.terminate()}
     let newTimer = new Timer(interval, 1000);
-    setTimers(timers.concat(newTimer));
-    timers.forEach((timer) => {
-      if (!timer.terminated) timer.terminate();
-      timer = {};
-    })
+    setTimer(newTimer);
     newTimer.countDown({
       every: ()=>{setLeftTime(newTimer.curTime)},
       complete: ()=>{fetchNews(queries)}
