@@ -21,3 +21,17 @@ export const DELETE_SUBSCRIPTION = 'DELETE_SUBSCRIPTION';
 export const SET_FILTER_CONF = 'SET_FILTER_CONF';
 export const SET_UPDATE_CONF = 'SET_UPDATE_CONF';
 export const TOGGLE_FILTER_CONF = 'TOGGLE_FILTER_CONF';
+
+export const SET_LEFTTIME = 'SET_LEFTTIME';
+export const SET_FETCHER_TIMEOUTID = 'SET_FETCHER_TIMEOUTID';
+export const AUTU_FETCH = 'AUTO_FETCH';
+
+// Not yet implemented
+export const ADD_TAG = 'ADD_TAG';
+export const DELETE_TAG = 'DELETE_TAG';
+export const MODIFY_TAG = 'MODIFY_TAG';
+
+export const SAVE_ARTICLE = 'SAVE_ARTICLE';
+export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+export const MEMO_TO_ARTICLE = 'MEMO_TO_ARTICLE';
+

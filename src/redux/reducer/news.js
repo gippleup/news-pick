@@ -23,6 +23,7 @@ const news = (state=initialState, action) => {
   switch(action.type) {
     case type.FETCH_NEWS: {
       let {keywordBlocks, newLinks} = action.payload;
+      console.log(keywordBlocks);
       Object.keys(keywordBlocks).forEach(keyword => {
         if (!state.keywords[keyword]) {
           newState.keywords[keyword] = keywordBlocks[keyword];

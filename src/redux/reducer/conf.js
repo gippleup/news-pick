@@ -9,7 +9,7 @@ const initialState = {
   },
   update: {
     auto: true,
-    interval: time.minute(5),
+    interval: time.minute(0.1),
   }
 }
 

@@ -220,3 +220,4 @@ export const toggleFilterConf = targetFilters => ({
   type: type.TOGGLE_FILTER_CONF,
   payload: targetFilters,
 })
+
