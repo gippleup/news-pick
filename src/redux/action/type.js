@@ -5,6 +5,7 @@ export const CLEAR_ALL_QUERY = 'CLEAR_ALL_QUERY';
 export const FETCH_NEWS = 'FETCH_NEWS';
 export const ADD_NEWS = 'ADD_NEWS';
 export const DELETE_NEWS = 'DELETE_NEWS';
+export const DELETE_NEWSBLOCK = 'DELETE_NEWSBLOCK'
 
 export const ADD_PRESS = 'ADD_PRESS';
 export const UPDATE_PRESS = 'UPDATE_PRESS';

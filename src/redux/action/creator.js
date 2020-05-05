@@ -84,7 +84,7 @@ export const fetchNews = (queries, display, start, sort) => async (dispatch, get
   })
 
   /* Get hosts */
-  let hosts = filteredItems.map(
+  let pressList = filteredItems.map(
     items => items
     .map(item => {
       let host = getHost(item)
@@ -94,9 +94,8 @@ export const fetchNews = (queries, display, start, sort) => async (dispatch, get
       }
     })
   ).reduce((acc, ele) => acc.concat(ele), [])
-
   /* Dispatch action: UPDATE_PRESS */
-  dispatch(updatePress(hosts))
+  dispatch(updatePress(pressList, 'add'))
 }
 
 
@@ -108,6 +107,21 @@ export const deleteNews = (keyword, itemLink) => ({
   }
 })
 
+
+export const deleteNewsBlock = (block={items:[], keyword:''}) => (dispatch, getState) => {
+  let pressList = block.items.map((item) => {
+    let host = url.parse(item.originallink).host
+    let pressName = getState().press.allowed[host]
+    return {
+      name: pressName
+    }
+  })
+  dispatch(updatePress(pressList, 'delete'))
+  dispatch({
+    type: type.DELETE_NEWSBLOCK,
+    payload: block
+  })
+} 
 
 /**
  * @param {String} item.title
@@ -132,9 +146,12 @@ export const addPress = (pressList) => ({
   payload: pressList
 })
 
-export const updatePress = (hosts) => ({
+export const updatePress = (pressList, updateType) => ({
   type: type.UPDATE_PRESS,
-  payload: hosts,
+  payload: {
+    pressList,
+    updateType
+  }
 })
 
 export const deletePress = (pressList) => ({

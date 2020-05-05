@@ -3,12 +3,11 @@ import {Icon} from '../resources'
 import { connect } from 'react-redux'
 import * as action from '../../redux/action/creator'
 import time from '../../reference/time'
-import Queries from './Queries/Queries'
 import LeftTimer from './LeftTimer/LeftTimer'
 const Timer = require('../../helper/Timer').default;
 
 
-function Searcher({queries, interval, fetchNews, addQuery}) {
+function Searcher({queries, interval, fetchNews, addQuery, press}) {
   const SearchIcon = Icon.search;
   const searchTimeLimit = time.minute(0.1);
   const [curInput, setInput] = useState('');
@@ -57,15 +56,15 @@ function Searcher({queries, interval, fetchNews, addQuery}) {
           <button onClick={onSubmit} style={{width:'32px', height:'32px'}} type="submit"><SearchIcon style={{width:'80%', height:'80%', padding:'10%'}}/></button>
         </div>
       </form>
-      <Queries/>
-      <LeftTimer leftTime={leftTime}/>
+      {leftTime > 0 ? <LeftTimer leftTime={leftTime}/> : <></>}
+      
     </div>
   )
 }
 
 const mapStateToProps = (state) => ({
   queries: Object.keys(state.query),
-  interval: state.conf.update.interval
+  interval: state.conf.update.interval,
 })
 
 export default connect(mapStateToProps, {...action})(Searcher)

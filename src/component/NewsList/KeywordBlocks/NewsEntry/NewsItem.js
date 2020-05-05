@@ -7,7 +7,6 @@ function NewsItem({item, linkToPress}) {
   let host = (link) => url.parse(link).host;
   let {title, originallink, link:naverLink , description, pubDate} = item;
   let pressName = linkToPress[host(originallink)];
-  console.log(url.parse(originallink).host)
   return (
     <div style={{textAlign:'left', marginLeft:'5%', marginRight:'5%', marginBottom:'1vh', backgroundColor:'pink'}}>
       <p dangerouslySetInnerHTML={{__html:title}}></p>

@@ -1,12 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import KeywordBlock from './KeywordBlocks/KeywordBlock'
+const url = require('url');
 
-function NewsList({keywordBlocks}) {
+function NewsList({keywordBlocks, filter, linkToPress}) {
   
   let blocks = Object.keys(keywordBlocks).map((keyword, i) => {
+    if (filter.keyword[keyword]) {return <></>}
     let {items} = keywordBlocks[keyword];
-    return <KeywordBlock key={i} keyword={keyword} items={items}/>
+    let filteredItems = items
+      .filter((item) => {
+        let host = url.parse(item.originallink).host
+        let press = linkToPress[host]
+        if (filter.press[press]) return false
+        return true
+      })
+
+    return <KeywordBlock key={i} keyword={keyword} items={filteredItems}/>
   })
 
   return (
@@ -17,7 +27,13 @@ function NewsList({keywordBlocks}) {
 }
 
 const mapStateToProps = state => ({
-  keywordBlocks: state.news.keywords
+  keywordBlocks: state.news.keywords,
+  filter: {
+    keyword: state.filter.tag,
+    press: state.filter.press,
+    customTag: state.filter.custom,
+  },
+  linkToPress: state.press.allowed,
 })
 
 export default connect(mapStateToProps, null)(NewsList);
