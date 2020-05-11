@@ -1,0 +1,26 @@
+.news-title {
+  font-family: 'Noto Sans KR',
+  sans-serif;
+  font-size: 1.5em;
+}
+
+.new-description {
+  /* font-family: 'Song Myung',
+  serif; */
+  font-family: 'Noto Serif KR',
+  serif;
+}
+
+.news-item-top-button {
+  background-color: lightgrey;
+  padding: '0 1px';
+  margin: 0;
+  outline: 0;
+  border-radius: '1px solid transparent';
+  border: 0;
+  transition-duration: 100ms;
+}
+
+.news-item-top-button:hover {
+  background-color: white;
+}

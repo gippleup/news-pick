@@ -15,8 +15,9 @@ function NewsList({keywordBlocks, filter, linkToPress}) {
         if (filter.press[press]) return false
         return true
       })
-
-    return <KeywordBlock key={i} keyword={keyword} items={filteredItems}/>
+    let isLast = false;
+    if (keywordBlocks.length - 1 === i) {isLast=true}
+    return <KeywordBlock key={i} isLast={isLast} keyword={keyword} items={filteredItems}/>
   })
 
   return (

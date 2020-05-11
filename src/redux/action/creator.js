@@ -95,6 +95,7 @@ export const fetchNews = (queries, display, start, sort) => async (dispatch, get
     })
   ).reduce((acc, ele) => acc.concat(ele), [])
   /* Dispatch action: UPDATE_PRESS */
+  console.log(pressList);
   dispatch(updatePress(pressList, 'add'))
 }
 
@@ -179,11 +180,23 @@ export const updateTagFilter = tags => (dispatch, getState) => {
 }
 
 
-export const toggleTagFilter = tags => ({
-  type: type.TOGGLE_TAG_FILTER,
-  payload: tags,
-})
+export const toggleTagFilter = tag => (dispatch, getState) => {
+  let newsList = getState().news.keywords[tag].items;
+  let pressList = newsList.map(({originallink}) => {
+    let link = url.parse(originallink).host;
+    let name = getState().press.allowed[link];
+    return {link, name}
+  })
 
+  let willFilter = !getState().filter.tag[tag]
+
+  dispatch(updatePress(pressList, willFilter ? 'delete' : 'add'))
+
+  dispatch({
+    type: type.TOGGLE_TAG_FILTER,
+    payload: tag,
+  })
+}
 
 
 export const setTimeFilter = (time) => ({

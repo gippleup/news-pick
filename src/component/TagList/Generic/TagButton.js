@@ -19,13 +19,7 @@ function TagButton({text, filtered, actions}) {
   return (
     <button 
     onClick={actions.toggleTag.bind(null, [text])}
-    style={{
-      borderRadius: '10px',
-      display:'inline-block', 
-      backgroundColor: filtered ? 'grey' : 'lightgreen',
-      padding: '5px 10px 5px 10px',
-      outline: 0,
-      margin:'5px'}}>
+    className={`tag${filtered ? ' filtered' : ''}`}>
       {text}
       {selectiveRender(actions.deleteTag !== undefined)}
     </button>

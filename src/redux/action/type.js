@@ -36,3 +36,7 @@ export const SAVE_ARTICLE = 'SAVE_ARTICLE';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
 export const MEMO_TO_ARTICLE = 'MEMO_TO_ARTICLE';
 
+export const LOGIN = 'LOGIN';
+export const SIGN_UP = 'SIGN_UP';
+export const FIND_ID = 'FIND_ID';
+export const FIND_PW = 'FIND_PW';

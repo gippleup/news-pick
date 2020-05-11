@@ -7,7 +7,7 @@
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: transparent;
+  background-color: black;
 }
 
 /* Handle */
@@ -23,3 +23,4 @@
   background: rgb(174, 255, 241);
   background: linear-gradient(0deg, rgba(174, 255, 241, 1) 0%, rgba(0, 174, 251, 1) 23%, rgba(38, 218, 160, 1) 50%, rgba(145, 255, 20, 1) 74%, rgba(233, 255, 137, 1) 95%);
 }
+

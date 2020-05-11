@@ -1,5 +1,9 @@
+@import './css/fonts.css';
+
 body {
   margin: 0;
+  padding-bottom: 2000px;
+  background-color: pink;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

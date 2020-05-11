@@ -1,10 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
-import Searcher from './component/Searcher/Searcher';
+import './css/App.css';
 import NewsList from './component/NewsList/NewsList';
-import Subscription from './component/Subscription/Subscription';
 import TagList from './component/TagList/TagList';
+import Header from './component/Header/Header';
 
 
 export const DELETE_PRESS = 'DELETE_PRESS';
@@ -12,7 +11,7 @@ export const DELETE_PRESS = 'DELETE_PRESS';
 function App() {
   return (
     <div className="App">
-      <Searcher/>
+      <Header/>
       <TagList/>
       <NewsList/>
     </div>

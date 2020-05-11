@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../../redux/action/creator'
 
 function KeywordBlock(props) {
-  let {items, keyword, deleteBlock} = props;
+  let {items, keyword, deleteBlock, isLast} = props;
 
   const [hasSpread, setHasSpread] = useState(false);
 
@@ -30,7 +30,7 @@ function KeywordBlock(props) {
   let newsItems = items.map((item, i) => <NewsItem key={i} item={item}/>) 
 
   return (
-    <div style={{backgroundColor:'grey', margin:'0 auto 10px auto'}}>
+    <div style={{backgroundColor:'grey', margin:`0 auto ${isLast ? 0 : 10}px auto`}}>
       <br/>
       <div style={{backgroundColor:'lightgreen', display:'grid', gridTemplateColumns:'auto 50%', padding:'2em 0 2em 0', alignItems:'center'}}>
         <div style={{textAlign:'left', marginLeft:'5vw', display:'inline-block'}}>
@@ -38,8 +38,8 @@ function KeywordBlock(props) {
           <h2 style={{display:'inline'}}>{`(${items.length})`}</h2>
         </div>
         <div style={{textAlign:'right'}}>
-          <button onClick={toggleSpread} style={{marginRight:'2vw', height:'40px', width:'40px', outline:0, borderRadius:'50%'}}>{Chevron()}</button>
-          <button onClick={deleteBlock.bind(null, {items, keyword})} style={{marginRight:'3vw', height:'40px', width:'40px', outline:0, borderRadius:'50%'}}>{Close()}</button>
+          <button className='keyword-block-top-button' onClick={toggleSpread}>{Chevron()}</button>
+          <button className='keyword-block-top-button' onClick={deleteBlock.bind(null, {items, keyword})}>{Close()}</button>
         </div>
       </div>
       <div style={{display:itemDisplay}}>

@@ -1,6 +1,7 @@
 import reducers from './reducer/_index';
 const redux = require('redux');
 const thunk = require('redux-thunk').default
+const dummyData = require('./dummyData.json')
 
 const customMiddleware = store => next => action => {
   console.log("Middleware triggered:", action.type);
@@ -23,6 +24,7 @@ const enhancer = composeEnhancers(
 
 const store = redux.createStore(
   reducers,
+  dummyData,
   enhancer
 )
 

@@ -1,4 +1,7 @@
 @import './scroll.css';
+@import './News.css';
+@import './Tag.css';
+@import './KeywordBlock.css';
 
 .App {
   text-align: center;

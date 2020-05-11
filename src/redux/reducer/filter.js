@@ -28,10 +28,8 @@ function filter(state=initialState, action) {
       return newState
     }
     case type.TOGGLE_TAG_FILTER: {
-      let tags = action.payload;
-      tags.forEach((tag) => {
-        newState.tag[tag] = !state.tag[tag]
-      })
+      let tag = action.payload;
+      newState.tag[tag] = !state.tag[tag]
       return newState;
     }
     case type.TOGGLE_PRESS_FILTER: {

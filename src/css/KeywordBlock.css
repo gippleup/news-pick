@@ -1,0 +1,15 @@
+.keyword-block-top-button {
+  margin-right: 2vw;
+  height: 40px;
+  width: 40px;
+  outline: 0;
+  border-radius: 50%;
+  border: 0;
+  background-color: white;
+  transition-duration: 100ms;
+}
+
+.keyword-block-top-button:hover {
+  border: 2px solid lightgray;
+  transform: scale(1.2)
+}
