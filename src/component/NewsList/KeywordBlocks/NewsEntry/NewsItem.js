@@ -9,6 +9,7 @@ import LoadingAnim from '../../../Generic/LoadingAnim/LoadingAnim';
 function NewsItem({keyword, itemId, item, linkToPress, digNews}) {
   let host = (link) => url.parse(link).host;
   let [digging, setDigging] = useState(false);
+  let [showMore, setShowMore] = useState(false);
   let {title, originallink, link:naverLink , description, pubDate} = item;
   let pressName = linkToPress[host(originallink)];
   let topButtonIconSize = '1.5em'
@@ -18,9 +19,10 @@ function NewsItem({keyword, itemId, item, linkToPress, digNews}) {
     margin: '1em',
   }
 
-  let showMore = () => {
+  let toggleShowMore = () => {
     if (digging) return;
     digNews(keyword, itemId, naverLink)
+    setShowMore(true);
     setDigging(true);
   }
 
@@ -67,7 +69,7 @@ function NewsItem({keyword, itemId, item, linkToPress, digNews}) {
           </div>
           <p dangerouslySetInnerHTML={{__html:description}}></p>
         </div>
-        <button className='news-item-show-more' onClick={showMore}>더 보기</button>
+        <button className='news-item-show-more' onClick={toggleShowMore}>더 보기</button>
       </div>
 
     </div>

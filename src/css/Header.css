@@ -1,0 +1,17 @@
+.header {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  position: fixed;
+  box-shadow: 0 3px 5px 5px rgba(0, 0, 0, 0.3);
+  top: 0;
+  height: 64px;
+  width: 100%;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  background-color: #443742;
+}
+
+.header.ontop {
+  box-shadow: none;
+}

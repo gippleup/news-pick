@@ -7,17 +7,25 @@ function Header() {
   let container = React.createRef();
   let [showMenu, setShowMenu] = useState(false);
 
+  useEffect(()=>{
+    let headerFunc = (e) => {
+      if (!container.current) return;
+      let { scrollY } = window;
+      if (scrollY <= 10) {
+        container.current.className = 'header ontop';
+      } else {
+        container.current.className = 'header';
+      }
+    }
+    window.removeEventListener('scroll', headerFunc);
+    window.addEventListener('scroll', headerFunc);
+  })
+
   return (
     <div style={{position:'fixed', zIndex:100}}>
-      <div style={{height: '64px'}}></div>
+      {/* <div style={{height:'64px'}}></div> */}
       <div ref={container}
-      style={{
-        display:'grid',
-        gridTemplateColumns:'auto auto',
-        alignItems:'center',
-        position: 'fixed',
-        top:0, height:'64px', width:'100%', 
-        backgroundColor:'#443742'}}>
+      className='header'>
         <MenuButton showMenu={{state:showMenu, set: (state) => setShowMenu(state)}}/>
         <Searcher/>
       </div>

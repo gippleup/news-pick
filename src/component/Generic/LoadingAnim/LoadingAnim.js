@@ -8,7 +8,8 @@ function LoadingAnim() {
     height: '10px',
     marginRight: '5px',
     borderRadius: '10px',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    border: '1px solid black'
   }
   
   let createCircle = (n) => {

@@ -6,10 +6,10 @@ import * as creator from '../../redux/action/creator'
 
 function TagList({list, actions}) {
   return (
-    <div >
+    <div style={{marginTop:'64px'}}>
       <Tags
       type='keyword'
-      style={{backgroundColor:'#846C5B', padding: '1em 0 1em 0'}}
+      style={{backgroundColor:'#cea07e', padding: '1em 0 1em 0'}}
       actions={actions.queries} 
       buttonText={{
         deleteTag:'Delete query',

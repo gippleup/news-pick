@@ -2,6 +2,7 @@
 @import './News.css';
 @import './Tag.css';
 @import './KeywordBlock.css';
+@import './Header.css';
 
 .App {
   text-align: center;

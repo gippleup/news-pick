@@ -11,7 +11,8 @@ function MenuBar({showMenu}) {
       targets: target,
       width: showMenu ? '300px' : 0,
       easing: showMenu ? 'easeOutElastic(1, .5)' : 'easeOutCubic',
-      duration: showMenu ? 500 : 500
+      duration: showMenu ? 500 : 500,
+      boxShadow: showMenu ? '5px 0 10px rgba(0,0,0,0.3)' : 'none'
     })
   })
 

@@ -7,11 +7,20 @@
   margin: 5px;
   transition-duration: 100ms;
   border: 0;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.3);
 }
 
 .tag.press {
   background-color: #846C5B;
   color: white
+}
+
+.tag.press:active {
+  background-color: grey;
+}
+
+.tag.press: {
+  background-color: red;
 }
 
 .tag.keyword {
