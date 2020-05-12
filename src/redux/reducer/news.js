@@ -35,6 +35,7 @@ const news = (state=initialState, action) => {
             total: newBlock.total,
           })
         }
+        newState.keywords[keyword].count = newState.keywords[keyword].items.length;
       })
       Object.assign(newState.links, newLinks);
       return newState;
@@ -67,6 +68,18 @@ const news = (state=initialState, action) => {
         };
       }
       newState.keywords[keyword].items.push(item);
+      return newState;
+    }
+
+    case type.DIG_NEWS: {
+      let {keyword, itemId, data} = action.payload;
+      let prevItem = newState.keywords[keyword].items[itemId];
+      let newItem = Object.assign({}, prevItem, {
+        description: data,
+        reporter: data.reporter,
+        reporterEmail: data.reporterEmail,
+      })
+      newState.keywords[keyword].items[itemId] = newItem;
       return newState;
     }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Icon} from '../../resources'
-function TagButton({text, filtered, actions}) {
+function TagButton({text, filtered, actions, type}) {
   const XIcon = Icon.x;
   const onClickX = () => {
     actions.deleteTag(text);
@@ -19,7 +19,7 @@ function TagButton({text, filtered, actions}) {
   return (
     <button 
     onClick={actions.toggleTag.bind(null, [text])}
-    className={`tag${filtered ? ' filtered' : ''}`}>
+    className={`tag${filtered ? ' filtered' : ''}${type ? ' ' + type : ''}`}>
       {text}
       {selectiveRender(actions.deleteTag !== undefined)}
     </button>

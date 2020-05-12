@@ -9,7 +9,17 @@
   border: 0;
 }
 
+.tag.press {
+  background-color: #846C5B;
+  color: white
+}
+
+.tag.keyword {
+  background-color: #EDD9A3;
+}
+
 .tag:hover {
+  color: black;
   background-color: white;
 }
 

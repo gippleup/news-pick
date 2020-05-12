@@ -27,12 +27,12 @@ function KeywordBlock(props) {
 
   let itemDisplay = hasSpread ? 'block' : 'none';
 
-  let newsItems = items.map((item, i) => <NewsItem key={i} item={item}/>) 
+  let newsItems = items.map((item, i) => <NewsItem keyword={keyword} itemId={i} key={i} item={item}/>) 
 
   return (
-    <div style={{backgroundColor:'grey', margin:`0 auto ${isLast ? 0 : 10}px auto`}}>
+    <div style={{backgroundColor:'#846C5B', margin:`10px auto ${isLast ? 0 : 10}px auto`}}>
       <br/>
-      <div style={{backgroundColor:'lightgreen', display:'grid', gridTemplateColumns:'auto 50%', padding:'2em 0 2em 0', alignItems:'center'}}>
+      <div style={{backgroundColor:'#EDD9A3', display:'grid', gridTemplateColumns:'auto 50%', padding:'2em 0 2em 0', alignItems:'center'}}>
         <div style={{textAlign:'left', marginLeft:'5vw', display:'inline-block'}}>
           <h1 style={{display:'inline'}}>{keyword}</h1>
           <h2 style={{display:'inline'}}>{`(${items.length})`}</h2>

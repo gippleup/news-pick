@@ -8,7 +8,8 @@ function TagList({list, actions}) {
   return (
     <div >
       <Tags
-      style={{backgroundColor:'orange', padding: '1em 0 1em 0'}}
+      type='keyword'
+      style={{backgroundColor:'#846C5B', padding: '1em 0 1em 0'}}
       actions={actions.queries} 
       buttonText={{
         deleteTag:'Delete query',
@@ -16,7 +17,8 @@ function TagList({list, actions}) {
       }} 
       list={list.queries}/>
       <Tags 
-      style={{backgroundColor:'skyblue', padding: '1em 0 1em 0'}}
+      type='press'
+      style={{backgroundColor:'#E2E8C0', padding: '1em 0 1em 0'}}
       actions={actions.press} 
       buttonText={{
         deleteTag:'Delete press',

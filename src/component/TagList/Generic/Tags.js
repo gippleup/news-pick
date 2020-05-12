@@ -1,7 +1,7 @@
 import React from 'react'
 import TagButton from './TagButton'
 
-function Tags({actions, list, buttonText, style}) {
+function Tags({actions, list, buttonText, style, type}) {
   let {toggleTag, clearAll, deleteTag} = actions;
 
   let existingTag = list.total.filter((item) => list.exist[item])
@@ -33,9 +33,9 @@ function Tags({actions, list, buttonText, style}) {
   return (
     <div style={style}>
       <div>
-        {mappedTag.map((tag) => {
+        {mappedTag.map((tag, i) => {
           let {text, filtered} = tag;
-          return <TagButton actions={{toggleTag}} text={text} filtered={filtered}/>
+          return <TagButton key={i} actions={{toggleTag}} type={type} text={text} filtered={filtered}/>
         })}
       </div>
       <div>

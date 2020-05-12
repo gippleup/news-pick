@@ -1,4 +1,4 @@
-import func from './functions'
+import func from './functions/index'
 import * as type from './type'
 import url from 'url'
 
@@ -94,9 +94,28 @@ export const fetchNews = (queries, display, start, sort) => async (dispatch, get
       }
     })
   ).reduce((acc, ele) => acc.concat(ele), [])
+  
   /* Dispatch action: UPDATE_PRESS */
-  console.log(pressList);
   dispatch(updatePress(pressList, 'add'))
+}
+
+
+export const digNews = (keyword, itemId, url) => (dispatch) => {
+  func.digNews(url)
+    .then((res) => {
+      console.log(res.data)
+      dispatch({
+        type: type.DIG_NEWS,
+        payload: {
+          keyword,
+          itemId,
+          data: res.data
+        }
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 
