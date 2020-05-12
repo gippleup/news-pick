@@ -78,6 +78,7 @@ const news = (state=initialState, action) => {
         description: data,
         reporter: data.reporter,
         reporterEmail: data.reporterEmail,
+        digged: true,
       })
       newState.keywords[keyword].items[itemId] = newItem;
       return newState;

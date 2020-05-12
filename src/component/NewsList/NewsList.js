@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import KeywordBlock from './KeywordBlocks/KeywordBlock'
+import LoadingAnim from '../Generic/LoadingAnim/LoadingAnim'
+
 const url = require('url');
 
 function NewsList({keywordBlocks, filter, linkToPress}) {

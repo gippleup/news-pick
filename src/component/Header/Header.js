@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import MenuButton from './Menu/Button/MenuButton';
 import Searcher from './Searcher/Searcher';
-import anime from 'animejs';
 import MenuBar from './Menu/Bar/MenuBar';
 
 function Header() {
@@ -9,7 +8,7 @@ function Header() {
   let [showMenu, setShowMenu] = useState(false);
 
   return (
-    <>
+    <div style={{position:'fixed', zIndex:100}}>
       <div style={{height: '64px'}}></div>
       <div ref={container}
       style={{
@@ -23,7 +22,7 @@ function Header() {
         <Searcher/>
       </div>
       <MenuBar showMenu={showMenu}/>
-    </>
+    </div>
   )
 }
 

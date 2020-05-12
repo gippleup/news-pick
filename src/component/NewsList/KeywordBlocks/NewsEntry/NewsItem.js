@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {connect} from 'react-redux'
 import url from 'url'
 import LinkButton from './LinkButton';
 import {Icon} from '../../../resources';
 import * as actions from '../../../../redux/action/creator'
+import LoadingAnim from '../../../Generic/LoadingAnim/LoadingAnim';
 
 function NewsItem({keyword, itemId, item, linkToPress, digNews}) {
   let host = (link) => url.parse(link).host;
-  let [digged, setDigged] = useState(false);
+  let [digging, setDigging] = useState(false);
   let {title, originallink, link:naverLink , description, pubDate} = item;
   let pressName = linkToPress[host(originallink)];
   let topButtonIconSize = '1.5em'
@@ -18,9 +19,24 @@ function NewsItem({keyword, itemId, item, linkToPress, digNews}) {
   }
 
   let showMore = () => {
-    if (digged) return;
+    if (digging) return;
     digNews(keyword, itemId, naverLink)
-    setDigged(true);
+    setDigging(true);
+  }
+
+  let selectiveRender = () => {
+    if (item.digged) {
+      return <></>
+    } else if (digging) {
+      return <LoadingAnim/>
+    } else {
+      return <></>
+    }
+  }
+
+  let curtainClass = () => {
+    let base = 'description-curtain'
+    return !item.digged && digging ? base + ' digging' : base
   }
 
   return (
@@ -39,19 +55,20 @@ function NewsItem({keyword, itemId, item, linkToPress, digNews}) {
       </div>
       
       {/* Body */}
-      <div class='news-description-container'>
+      <div className='news-description-container'>
         <div style={{display:'flex', justifyItems:'center'}}>
           <p style={{display:'inline-block', marginRight:'3px'}}>{pubDate}</p>
           <LinkButton text="Naver" color='#27db27' link={naverLink}/>
           <LinkButton text={pressName} color='#75ffbc' link={originallink}/>
         </div>
         <div className='news-description'>
-          <div className='description-curtain'></div>
+          <div onTransitionEnd={(e)=> {if(!item.digged) return; let self = e.target; self.outerHTML=''}} className={curtainClass()}>
+            {selectiveRender()}
+          </div>
           <p dangerouslySetInnerHTML={{__html:description}}></p>
         </div>
         <button className='news-item-show-more' onClick={showMore}>더 보기</button>
       </div>
-
 
     </div>
     </>
