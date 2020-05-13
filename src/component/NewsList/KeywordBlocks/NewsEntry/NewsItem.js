@@ -52,7 +52,7 @@ function NewsItem({keyword, itemId, item, linkToPress, digNews}) {
       </div>
       
       {/* Title */}
-      <div className='news-title' style={{backgroundColor:'#CEA07E', padding: '5px 20px'}}>
+      <div className='news-title' style={{position:'relative', backgroundColor:'#CEA07E', padding: '5px 20px'}}>
         <p style={{marginBottom:'0.5em', marginTop:'0.5em'}} dangerouslySetInnerHTML={{__html:title}}></p>
       </div>
       
@@ -69,7 +69,9 @@ function NewsItem({keyword, itemId, item, linkToPress, digNews}) {
           </div>
           <p dangerouslySetInnerHTML={{__html:description}}></p>
         </div>
-        <button className='news-item-show-more' onClick={toggleShowMore}>더 보기</button>
+        <div style={{display:'block', margin:0}}>
+          <button className='news-item-show-more' onClick={toggleShowMore}>더 보기</button>
+        </div>
       </div>
 
     </div>

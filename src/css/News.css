@@ -67,10 +67,10 @@
 }
 
 .news-description-container {
-  display: grid;
-  grid-template-rows: auto auto;
+  display: flex;
+  flex-direction: column;
+  grid-template-rows: auto auto auto;
   justify-content: center;
-  /* padding: 0 5%; */
   background-color:#EDD9A3;
 }
 
