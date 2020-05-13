@@ -1,6 +1,8 @@
-const fetchNews = require('./fetchNews');
-const digNews = require('./digNews');
-module.exports = {
+import fetchNews from'./fetchNews'
+import digNews from './digNews'
+let func = {
   fetchNews,
   digNews
 }
+
+export default func

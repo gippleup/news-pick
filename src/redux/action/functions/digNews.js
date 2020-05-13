@@ -11,4 +11,4 @@ async function digNews (newslink) {
   return data;
 }
 
-module.exports = digNews
+export default digNews

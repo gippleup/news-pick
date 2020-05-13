@@ -1,6 +1,7 @@
 import func from './functions/index'
 import * as type from './type'
 import url from 'url'
+console.log(func)
 
 export const addQuery = (query) => ({
   type: type.ADD_QUERY,

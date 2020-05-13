@@ -38,4 +38,4 @@ async function fetchNews(query, display=100, start=1, sort = 'date') {
   return data;
 }
 
-module.exports = fetchNews
+export default fetchNews
